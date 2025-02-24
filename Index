@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtor Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav li {
+            margin-right: 1em;
+        }
+        nav a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav li {
+                margin-bottom: 0.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="houses.html">Houses Available</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Welcome to [Your Name] Realty</h1>
+            <p>Your trusted partner in finding your dream home.</p>
+            <img src="https://via.placeholder.com/800x400" alt="Hero Image">
+        </section>
+        <section>
+            <h2>Featured Properties</h2>
+            <div>
+                <img src="https://via.placeholder.com/300x200" alt="Property 1">
+                <p>Property 1: A beautiful 3-bedroom house in a quiet neighborhood.</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/300x200" alt="Property 2">
+                <p>Property 2: A modern apartment with stunning city views.</p>
+            </div>
+            <!-- Add more properties as needed -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 [Your Name] Realty. All rights reserved.</p>
+    </footer>
+</body>
+</html>
