@@ -1,0 +1,183 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background-image: url('hero-bg.jpg');
+    background-size: cover;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 24px;
+}
+
+/* About Section */
+.about {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.about img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+/* Services Section */
+.services {
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.services .service {
+    margin: 20px;
+    display: inline-block;
+    width: 30%;
+}
+
+.services i {
+    font-size: 48px;
+    color: #007bff;
+}
+
+/* Properties Section */
+.properties {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.properties .property {
+    display: inline-block;
+    width: 30%;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.properties img {
+    width: 100%;
+    height: auto;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.testimonials .testimonial {
+    margin: 20px;
+    font-style: italic;
+}
+
+/* Contact Section */
+.contact {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact input, .contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+footer .social-media a {
+    color: #fff;
+    margin: 0 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .services .service, .properties .property {
+        width: 100%;
+    }
+}
