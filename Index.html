@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logo Maker</title>
-    <!-- Import Google Fonts -->
+    <!-- Import Google Fonts for a modern look -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -107,7 +107,7 @@
                 <label for="company-name">Company Name:</label>
                 <input type="text" id="company-name" name="company-name" placeholder="Enter your company name" required>
                 
-                <label for="description">Logo Description Prompt:</label>
+                <label for="description">Logo Description:</label>
                 <textarea id="description" name="description" placeholder="Describe your desired logo (e.g., 'a modern tech logo with blue and green colors, featuring a rocket')"></textarea>
                 
                 <button type="submit">Generate Logo</button>
@@ -132,17 +132,17 @@
             const companyName = document.getElementById('company-name').value;
             const description = document.getElementById('description').value;
 
-            // Note: The API key for the AI (e.g., Grok) should be handled server-side for security.
-            // The server should make the API call using the companyName and description.
+            // Combine inputs into a prompt for the API
+            const prompt = `Create a logo for ${companyName}: ${description}`;
 
             try {
-                // Send data to the server to generate the logo
-                const response = await fetch('/generate-logo', {
+                // Send data to your Render backend (replace with your actual Render URL)
+                const response = await fetch('https://launch1.onrender.com', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ companyName, description })
+                    body: JSON.stringify({ prompt })
                 });
 
                 const data = await response.json();
