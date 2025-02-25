@@ -17,7 +17,7 @@ app.post('/generate-logo', async (req, res) => {
 
     try {
         const apiKey = process.env.GROK_API_KEY;
-        const apiUrl = 'https://api.x.ai/v1'; // Placeholder; update with real endpoint
+        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Placeholder; update with real endpoint
 
         const response = await fetch(apiUrl, {
             method: 'POST',
