@@ -3,118 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe Realty</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Logo Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+            max-width: 800px;
+            margin: auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 1em;
+        }
+        input, button {
+            padding: 0.5em;
+            margin-top: 0.5em;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #logo-display {
+            margin-top: 2em;
+            text-align: center;
+        }
+        #logo-image {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header with Logo and Navigation -->
     <header>
-        <div class="logo">John Doe Realty</div>
+        <h1>Logo Maker</h1>
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#properties">Properties</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h1>Find Your Dream Home Today</h1>
-        <p>Expert real estate services tailored to your needs.</p>
-        <a href="#properties" class="btn">View Properties</a>
-    </section>
+    <main>
+        <section>
+            <h2>Create Your Logo</h2>
+            <form id="logo-form">
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company-name" required>
+                
+                <label for="slogan">Slogan:</label>
+                <input type="text" id="slogan" name="slogan">
+                
+                <label for="colors">Preferred Colors:</label>
+                <input type="text" id="colors" name="colors" placeholder="e.g., blue, red">
+                
+                <button type="submit">Generate Logo</button>
+            </form>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>With over 10 years of experience in the real estate market, John Doe Realty is dedicated to helping you find the perfect property. Our team of experts is committed to providing personalized service and expert advice.</p>
-        <img src="202250122_151149.jpg" alt="Photo of John Doe">
-    </section>
+        <section id="logo-display">
+            <h2>Your Logo</h2>
+            <img id="logo-image" src="" alt="Generated Logo">
+        </section>
+    </main>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <div class="service">
-            <i class="fas fa-home"></i>
-            <h3>Buying</h3>
-            <p>Find the perfect home with our expert guidance.</p>
-        </div>
-        <div class="service">
-            <i class="fas fa-dollar-sign"></i>
-            <h3>Selling</h3>
-            <p>Get the best price for your property with our marketing strategies.</p>
-        </div>
-        <div class="service">
-            <i class="fas fa-key"></i>
-            <h3>Renting</h3>
-            <p>Discover rental properties that fit your lifestyle and budget.</p>
-        </div>
-    </section>
-
-    <!-- Featured Properties Section -->
-    <section id="properties" class="properties">
-        <h2>Featured Properties</h2>
-        <div class="property">
-            <img src="DSC01223.jpg" alt="Photo of 123 Main St">
-            <h3>123 Main St</h3>
-            <p>$350,000</p>
-            <a href="#" class="btn">View Details</a>
-        </div>
-        <div class="property">
-            <img src="DSC01227.jpg" alt="Photo of 456 Elm St">
-            <h3>456 Elm St</h3>
-            <p>$420,000</p>
-            <a href="#" class="btn">View Details</a>
-        </div>
-        <div class="property">
-            <img src="DSC01258.jpg" alt="Photo of 789 Oak St">
-            <h3>789 Oak St</h3>
-            <p>$500,000</p>
-            <a href="#" class="btn">View Details</a>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonial">
-            <p>"John Doe Realty made buying my first home a breeze!"</p>
-            <p>- Jane Smith</p>
-        </div>
-        <div class="testimonial">
-            <p>"Professional and efficient service. Highly recommend!"</p>
-            <p>- Mark Johnson</p>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Message"></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="contact-info">
-            <p>Phone: (123) 456-7890</p>
-            <p>Email: info@johndoerealty.com</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <p>© 2023 John Doe Realty. All rights reserved.</p>
-        <div class="social-media">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
+        <p>&copy; 2025 Logo Maker</p>
     </footer>
+
+    <script>
+        document.getElementById('logo-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Collect form input values
+            const companyName = document.getElementById('company-name').value;
+            const slogan = document.getElementById('slogan').value;
+            const colors = document.getElementById('colors').value;
+
+            // Note: The API key for Grok (or another AI API) should be attached on the server side for security.
+            // Example (not recommended for client-side): const apiKey = 'your-api-key-here';
+            // Instead, the server handles the API key and makes the request to the AI API.
+
+            try {
+                // Send data to the server to generate the logo
+                const response = await fetch('/generate-logo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ companyName, slogan, colors })
+                });
+
+                const data = await response.json();
+
+                if (data.imageUrl) {
+                    // Display the generated logo
+                    document.getElementById('logo-image').src = data.imageUrl;
+                } else {
+                    alert('Failed to generate logo. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while generating the logo.');
+            }
+        });
+    </script>
 </body>
 </html>
