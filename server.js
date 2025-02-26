@@ -1,23 +1,18 @@
 const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch');
-
+const fetch = require('node-fetch'); // Ensure this is installed
 const app = express();
-app.use(cors());
+
 app.use(express.json());
-require('dotenv').config();
 
-const PORT = process.env.PORT || 5000;
-
-app.post('/generate-logo', async (req, res) => {
+app.post('/chat-response', async (req, res) => {
     const { prompt } = req.body;
     if (!prompt) {
         return res.status(400).json({ error: 'Prompt is required' });
     }
 
     try {
-        const apiKey = process.env.GROK_API_KEY;
-        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Replace with the correct endpoint from docs
+        const apiKey = process.env.GROK_API_KEY; // Set this in your hosting platform
+        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Verify the correct Grok endpoint
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -26,27 +21,27 @@ app.post('/generate-logo', async (req, res) => {
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'grok-2-latest',  // Specify the Grok model
-                prompt: prompt,          // e.g., "A modern blue logo for Launch1"
-                n: 1,                    // Generate 1 image
-                size: '1024x1024'        // High-resolution output
+                model: 'grok-2-latest', // Use the model you specified
+                messages: [
+                    { role: 'system', content: 'You are Grok, a helpful assistant.' },
+                    { role: 'user', content: prompt }
+                ],
+                temperature: 0.7
             })
         });
 
         if (!response.ok) {
-            throw new Error(`Grok API request failed: ${response.statusText}`);
+            throw new Error('Grok API request failed');
         }
 
         const data = await response.json();
-        const imageUrl = data.data[0].url; // Adjust based on actual response structure (see docs)
+        const chatResponse = data.choices[0].message.content; // Adjust based on API response structure
 
-        res.json({ imageUrl });
+        res.json({ response: chatResponse });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'Failed to generate logo' });
+        res.status(500).json({ error: 'Failed to get chat response' });
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.listen(3000, () => console.log('Server running on port 3000'));
