@@ -1,8 +1,14 @@
 const express = require('express');
-const fetch = require('node-fetch'); // Ensure this is installed
+const fetch = require('node-fetch');
 const app = express();
 
 app.use(express.json());
+
+// Enable CORS (uncomment if frontend and backend domains differ)
+// const cors = require('cors');
+// app.use(cors());
+
+const PORT = process.env.PORT || 5000; // Use Render's dynamic port or fallback to 5000
 
 app.post('/chat-response', async (req, res) => {
     const { prompt } = req.body;
@@ -11,8 +17,11 @@ app.post('/chat-response', async (req, res) => {
     }
 
     try {
-        const apiKey = process.env.GROK_API_KEY; // Set this in your hosting platform
-        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Verify the correct Grok endpoint
+        const apiKey = process.env.GROK_API_KEY;
+        if (!apiKey) {
+            throw new Error('GROK_API_KEY is not set');
+        }
+        const apiUrl = 'https://api.x.ai/v1/chat/completions';
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -21,7 +30,7 @@ app.post('/chat-response', async (req, res) => {
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'grok-2-latest', // Use the model you specified
+                model: 'grok-2-latest', // Verify this model with xAI docs
                 messages: [
                     { role: 'system', content: 'You are Grok, a helpful assistant.' },
                     { role: 'user', content: prompt }
@@ -31,17 +40,18 @@ app.post('/chat-response', async (req, res) => {
         });
 
         if (!response.ok) {
-            throw new Error('Grok API request failed');
+            throw new Error(`Grok API request failed: ${response.statusText}`);
         }
 
         const data = await response.json();
-        const chatResponse = data.choices[0].message.content; // Adjust based on API response structure
+        console.log('API Response:', data); // Log for debugging
+        const chatResponse = data.choices[0].message.content; // Adjust if structure differs
 
         res.json({ response: chatResponse });
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error.message);
         res.status(500).json({ error: 'Failed to get chat response' });
     }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
