@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Maker</title>
+    <title>Chat with Grok</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <style>
         body {
@@ -29,7 +29,7 @@
             margin: 10px 0 5px;
             font-weight: bold;
         }
-        input, textarea {
+        textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -54,79 +54,67 @@
             color: #7f8c8d;
             margin: 20px 0;
         }
-        #logo-display {
+        #chat-display {
             text-align: center;
             margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
         }
-        #logo-image {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        #chat-response {
             display: none;
-        }
-        #download-button {
-            display: none;
-            margin-top: 15px;
-            background-color: #e67e22;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        #download-button:hover {
-            background-color: #d35400;
+            color: #333;
+            line-height: 1.6;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <h1>Logo Maker</h1>
-    <form id="logo-form">
-        <label for="company-name">Company Name:</label>
-        <input type="text" id="company-name" placeholder="e.g., TechCorp" required>
+    <h1>Chat with Grok</h1>
+    <form id="chat-form">
+        <label for="user-input">Your Question:</label>
+        <textarea id="user-input" placeholder="e.g., What is the meaning of life?" rows="4" required></textarea>
         
-        <label for="description">Logo Description:</label>
-        <textarea id="description" placeholder="e.g., A sleek logo with blue and silver tones" rows="4"></textarea>
-        
-        <button type="submit">Generate Logo</button>
+        <button type="submit">Ask Grok</button>
     </form>
 
-    <div id="loading">Generating your logo...</div>
-    <div id="logo-display">
-        <h2>Your Generated Logo</h2>
-        <img id="logo-image" src="" alt="Generated Logo">
-        <a id="download-button" download="logo.jpg">Download High-Resolution Logo</a>
+    <div id="loading">Getting response...</div>
+    <div id="chat-display">
+        <h2>Grok's Response</h2>
+        <div id="chat-response"></div>
     </div>
 
     <script>
-        document.getElementById('logo-form').addEventListener('submit', async (e) => {
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const companyName = document.getElementById('company-name').value;
-            const description = document.getElementById('description').value;
-            const prompt = `Create a logo for ${companyName}: ${description}`;
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput) {
+                alert('Please enter a question.');
+                return;
+            }
 
             // Show loading, hide previous results
             document.getElementById('loading').style.display = 'block';
-            document.getElementById('logo-image').style.display = 'none';
-            document.getElementById('download-button').style.display = 'none';
+            document.getElementById('chat-response').style.display = 'none';
 
             try {
-                const response = await fetch('https://launch1.onrender.com', {
+                const response = await fetch('https://launch1.onrender.com/chat-response', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt })
+                    body: JSON.stringify({ prompt: userInput })
                 });
 
                 const data = await response.json();
-                if (data.imageUrl) {
-                    // Display logo and enable download
-                    document.getElementById('logo-image').src = data.imageUrl;
-                    document.getElementById('logo-image').style.display = 'block';
-                    document.getElementById('download-button').href = data.imageUrl;
-                    document.getElementById('download-button').style.display = 'inline-block';
+                if (data.response) {
+                    // Display chat response
+                    document.getElementById('chat-response').textContent = data.response;
+                    document.getElementById('chat-response').style.display = 'block';
                 } else {
-                    alert('Failed to generate logo. Try again!');
+                    alert('Failed to get response. Try again!');
                 }
             } catch (error) {
                 console.error('Error:', error);
