@@ -17,7 +17,7 @@ app.post('/generate-logo', async (req, res) => {
 
     try {
         const apiKey = process.env.GROK_API_KEY;
-        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Placeholder; update with real endpoint
+        const apiUrl = 'https://api.x.ai/v1/chat/completions'; // Replace with the correct endpoint from docs
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -26,18 +26,19 @@ app.post('/generate-logo', async (req, res) => {
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                prompt,
-                n: 1,
-                size: '1024x1024' // High-resolution output
+                model: 'grok-2-latest',  // Specify the Grok model
+                prompt: prompt,          // e.g., "A modern blue logo for Launch1"
+                n: 1,                    // Generate 1 image
+                size: '1024x1024'        // High-resolution output
             })
         });
 
         if (!response.ok) {
-            throw new Error('Grok API request failed');
+            throw new Error(`Grok API request failed: ${response.statusText}`);
         }
 
         const data = await response.json();
-        const imageUrl = data.data[0].url; // Adjust based on actual API response
+        const imageUrl = data.data[0].url; // Adjust based on actual response structure (see docs)
 
         res.json({ imageUrl });
     } catch (error) {
